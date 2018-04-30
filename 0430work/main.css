@@ -1,0 +1,155 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: linear-gradient(rgba(47,23,15,.65),rgba(47,23,15,.65)),url(img/bg.jpg) no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+/* 头部字体 */
+.head-text {
+    margin: 70px 0;
+    text-transform: uppercase;
+    text-align: center;
+}
+.head-text-1 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #e6a756;
+    margin-bottom: 1rem;
+}
+.head-text-2 {
+    font-size: 5.5rem;
+    font-weight: 100;
+    line-height: 4rem;
+    color: #fff;
+}
+/* 导航栏 */
+.navbar {
+    background: rgba(47,23,15,.9);
+    width: 100%;
+    height: 85px;
+}
+.navbar ul {
+    margin: 0 auto;
+    height: 85px;
+    width: 32%;
+    min-width: 431px;
+}
+.navbar ul li:first-child {
+    color: #e6a756;
+}
+.navbar ul li {
+    font-size: .9rem;
+    font-weight: 800;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    list-style: none;
+    line-height: 85px;
+    float: left;
+    cursor: pointer;
+    color: rgba(255,255,255,.7);
+}
+.navbar ul li a:hover {
+    color: rgb(129, 116, 111);
+}
+/* 清浮动 */
+.clearfloat {
+    zoom: 1;
+}
+.clearfloat:after {
+    height: 0;
+    clear: both;
+    content: ".";
+    display: block;
+    visibility: hidden;
+}
+/* 中间图片布局 */
+.page {
+    margin: 5rem 9%;
+}
+.page .contain {
+    position: relative;
+}
+.page .contain img {
+    width: 75%;
+    float: right;
+}
+.page .contain .text {
+    width: 45%;
+    left: 0;
+    max-width: 370px;
+    margin-top: 3rem;
+    position: absolute;
+    background-color: rgba(255,255,255,.85);
+    text-align: center;
+    border-radius: .25rem;
+    padding: 3rem;
+}
+.page .contain .text h2, .page-text .contain .main h2 {
+    margin-bottom: 1.5rem;
+}
+.page .contain .text h2 .h2-p1, .page-text .contain .main .h2-p1 {
+    font-size: 1rem;
+    font-weight: 800;
+}
+.page .contain .text h2 .h2-p2, .page-text .contain .main .h2-p2 {
+    font-size: 3rem;
+    font-weight: 100;
+}
+.page .contain .text .p-text, .page-text .contain .main .p-text {
+    margin-bottom: 3rem;
+    line-height: 1.75rem;
+}
+.page .contain .text .intro-btn {
+    color: #fff;
+    position: absolute;
+    left: 36%;
+    bottom: -1rem;
+}
+.page .contain .text .intro-btn a {
+    padding: 1.5rem 1.2rem;
+    font-weight: 700;
+    font-size: .8rem;
+    border-radius: .25rem;
+    cursor: pointer;
+    background-color: #e6a756;
+}
+.page .contain .text .intro-btn a:hover {
+    background-color: #df902a;
+}
+/* 中间文字布局 */
+.page-text {
+    margin: 5rem 0;
+    background-color: rgba(230,167,86,.9);
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+.page-text .contain {
+    width: 70%;
+    max-width: 800px;
+    margin: 0 auto;
+    border: 2px solid #fff;
+    border-radius: .25rem;
+}
+.page-text .contain .main {
+    padding: 3rem;
+    margin: .5rem;
+    background-color: rgba(255,255,255,.85);
+    border-radius: .25rem;
+    text-align: center;
+}
+/* footer部分 */
+.footer {
+    width: 100%;
+    background-color: rgba(47,23,15,.9);
+    color: rgba(255,255,255,.3);
+    text-align: center;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+.footer p {
+    font-size: 80%;
+}
