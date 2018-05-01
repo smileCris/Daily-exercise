@@ -72,7 +72,7 @@ body {
 }
 /* 中间图片布局 */
 .page {
-    margin: 5rem 5%;
+    margin: 5rem 10%;
 }
 .page .contain {
     position: relative;
@@ -80,14 +80,14 @@ body {
 }
 .page .contain img {
     width: 75%;
+    min-height: 480px;
     float: right;
     border-radius: .25rem;
 }
 .page .contain .text {
-    width: 60%;
-    left: 0;
+    width: 55%;
     min-width: 370px;
-    margin-top: 3rem;
+    margin-top: 6%;
     position: absolute;
     background-color: rgba(255,255,255,.85);
     text-align: center;

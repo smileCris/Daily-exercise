@@ -61,11 +61,17 @@ h1 {
     float: none;
 }
 .page .contain .text {
-    width: 100%;
+    min-width: 100%;
     margin-top: 1rem;
     position: relative;
     background-color: rgba(255,255,255,.85);
     text-align: center;
     border-radius: .25rem;
     padding: 3rem;
+}
+.page .contain .text .intro-btn {
+    color: #fff;
+    position: relative;
+    left: 0;
+    bottom: 0;
 }
