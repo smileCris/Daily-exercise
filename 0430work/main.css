@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 body {
     background: linear-gradient(rgba(47,23,15,.65),rgba(47,23,15,.65)),url(img/bg.jpg) no-repeat;
@@ -52,6 +53,9 @@ body {
     cursor: pointer;
     color: rgba(255,255,255,.7);
 }
+.navbar ul #menu-checkbox, .navbar ul #menu-toggle {
+    display: none;
+}
 .navbar ul li a:hover {
     color: rgb(129, 116, 111);
 }
@@ -68,7 +72,7 @@ body {
 }
 /* 中间图片布局 */
 .page {
-    margin: 5rem 9%;
+    margin: 5rem 5%;
 }
 .page .contain {
     position: relative;
@@ -77,9 +81,10 @@ body {
 .page .contain img {
     width: 75%;
     float: right;
+    border-radius: .25rem;
 }
 .page .contain .text {
-    width: 40%;
+    width: 60%;
     left: 0;
     min-width: 370px;
     margin-top: 3rem;
