@@ -39,7 +39,7 @@ body {
     width: 32%;
     min-width: 431px;
 }
-.navbar ul li:first-child {
+.navbar ul li:nth-child(3) {
     color: #e6a756;
 }
 .navbar ul li {
