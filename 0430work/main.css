@@ -72,15 +72,16 @@ body {
 }
 .page .contain {
     position: relative;
+    min-height: 450px;
 }
 .page .contain img {
     width: 75%;
     float: right;
 }
 .page .contain .text {
-    width: 45%;
+    width: 40%;
     left: 0;
-    max-width: 370px;
+    min-width: 370px;
     margin-top: 3rem;
     position: absolute;
     background-color: rgba(255,255,255,.85);
