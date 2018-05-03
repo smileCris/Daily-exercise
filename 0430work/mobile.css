@@ -52,7 +52,7 @@ h1 {
 }
 /* 中间图片布局 */
 .page {
-    margin: 5rem 5%;
+    margin: 10% 5%;
 }
 .page .contain img {
     width: 100%;
