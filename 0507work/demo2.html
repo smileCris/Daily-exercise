@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CarData</title>
+</head>
+<body>
+    <button onclick="loadMsg()">请求数据</button>
+    <div id="msg"></div>
+    <script>
+        function loadMsg() {
+            var xmlHttp;
+            if(window.ActiveXObject) {         //IE5,IE6
+                xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }else if(window.XMLHttpRequest) {         //IE7+, Firefox, Chrome, Opera, Safari
+                xmlHttp = new XMLHttpRequest();
+            }
+            xmlHttp.open("POST","http://www.1ke.co/backend/teach/js/json.php",true);
+            xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            xmlHttp.send('fname=Bill&lname=Gates');
+            xmlHttp.onreadystatechange = function() {
+                if ((xmlHttp.readyState == 4) && (xmlHttp.status == 200)) {
+                    document.getElementById("msg").innerHTML=xmlHttp.responseText;
+                    var txt=xmlHttp.responseText;
+                    var obj=eval("("+txt+")");
+                    for(var i=0; i<obj.cars.length; i++){
+                        document.write(obj.cars[i]+"<br>");
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

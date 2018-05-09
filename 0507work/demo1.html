@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login/Register</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background: url(bg1.png) no-repeat center bottom;
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #msg.show{
+            padding: 10px;
+            color: #fff;
+         	background:#75c0dd;
+             	
+        }
+        .formbox {
+            width: 360px;
+            margin-top: 8%;
+            padding: 35px;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 1px 2px 15px rgba(0,0,0,.3);
+        }
+        .formbox h3 {
+            color: #00aaee;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 500;
+        }
+        .formbox h3 ul {
+            display: flex;
+            padding: 0;
+        }
+        .formbox h3 ul li {
+            list-style: none;
+            width: 50%;
+            cursor: pointer;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        .formbox h3 ul li:nth-child(1) {
+            border-right: 1px solid #eee;
+        }
+        .formbox #page1 {
+            display: inline;
+        }
+        .formbox #page2 {
+            display: none;
+        }
+        .formbox .error {
+            height: 26px;
+            line-height: 26px;
+            color: #f13d3d;
+            text-align: center;
+            display: none;
+        }
+        .formbox form {
+            margin: 10px 25px;
+        }
+        .formbox form p {
+            margin: 15px 0 ;
+        }
+        .formbox form .inputbox, .formbox form .username, .formbox form .password {
+            width: 100%;
+            height: 45px;
+            margin-top: 20px;
+            border: 2px solid #ccc;
+        }
+        .formbox form .username, .formbox form .password {
+            padding: 5px;
+        }
+        .formbox form .inputbox {
+            position: relative;
+        }
+        .formbox form select {
+            position: absolute;
+            width: 62px;
+            height: 40px;
+            border: 0;
+            outline: none;
+        }
+        .formbox form .phone {
+            padding: 6px 12px;
+            padding-left: 92px;
+            width: 235px;
+            height: 100%;
+            outline: none;
+            border: 0;
+        }
+        .formbox form .btn {
+            width: 100%;
+            margin-top: 15px;
+            height: 42px;
+            background: #00aaee;
+            color: #fff;
+            outline: none;
+            border: none;
+        }
+        .formbox form .btn:hover {
+            background: #03a1df;
+        }
+    </style>
+</head>
+<body>
+    <div id="msg"></div>
+    <div class="formbox">
+        <h3>
+            <ul>
+                <li><a onclick="getLogin()">登录</a></li>
+                <li><a onclick="getRegister()">注册</a></li>
+            </ul>
+        </h3>
+        <form name="loginForm" onsubmit="return CheckLogin()">
+            <div id="page1">
+                <div id="loginTip" class="error"></div>
+                <input type="text" class="username" name="username" placeholder="输入姓名"/>
+                <input type="password" class="password" name="pwd" placeholder="输入密码" onBlur="checkuser()">
+                <input type="submit" value="登录" class="btn"/></p>
+            </div>
+        </form>
+        <form name="registerForm" onsubmit="return CheckRegister()">           
+            <div id="page2">
+                <div id="loginTip1" class="error"></div>
+                <input type="text" class="username" name="name1" placeholder="输入姓名"/>
+                <input type="password" class="password" name="pwd1"  placeholder="输入密码">
+                <div class="inputbox">
+                    <select name="telFirst">
+                        <option>+86</option>
+                        <option>+852</option>
+                        <option>+886</option>
+                        <option>+1</option>
+                    </select>
+                    <input type="text" class="phone" name="tel" placeholder="输入手机号">
+                </div>
+                <p>性别：<input type="radio" value="男" name="sex">男
+                <input type="radio" value="女" name="sex">女</p>
+                <p>爱好：<input type="checkbox" name="hobby" value="跑步">跑步
+                <input type="checkbox" name="hobby" value="看书">看书
+                <input type="checkbox" name="hobby" value="摄影">摄影
+                <input type="submit" value="注册" class="btn"/></p>
+            </div>
+        </form>
+    </div>
+    <script>
+        function getLogin() {
+            document.getElementById("page1").style.display="inline";
+            document.getElementById("page2").style.display="none";
+        }
+
+        function getRegister() {
+            document.getElementById("page1").style.display="none";
+            document.getElementById("page2").style.display="inline";                        
+        }
+
+        var xmlHttp;
+        function createxmlHttpRequest() {
+            if(window.ActiveXObject) {         //IE5,IE6
+                xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }else if(window.XMLHttpRequest) {         //IE7+, Firefox, Chrome, Opera, Safari
+                xmlHttp = new XMLHttpRequest();
+            }
+        }
+
+        function doPost(url,data) {
+            createxmlHttpRequest();
+            var msg = document.getElementById("msg");
+            xmlHttp.open("POST",url,true);
+            xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            xmlHttp.send(data);
+            xmlHttp.onreadystatechange = function() {
+                if ((xmlHttp.readyState == 4) && (xmlHttp.status == 200)) {
+                    msg.innerHTML=xmlHttp.responseText;
+                    msg.setAttribute("class","show");
+                }
+            }
+        }
+
+        function checkuser() {
+            var url="http://www.1ke.co/backend/teach/js/post.php";
+            data = "username="+loginForm.username.value+"&pwd="+loginForm.pwd.value;
+            doPost(url,data);
+        }
+
+        function CheckLogin() {
+            if(loginForm.username.value == "") {
+                document.getElementById("loginTip").style.display="inline";
+                document.getElementById("loginTip").innerHTML="请输入姓名";
+                loginForm.username.focus();
+                return false;
+            }
+            if(loginForm.pwd.value.length < 6){
+                document.getElementById("loginTip").style.display="inline";
+                document.getElementById("loginTip").innerHTML="密码不能小于六位";
+                loginForm.pwd.focus();
+                return false;
+            }            
+        }
+
+        function CheckRegister() {
+            var item="";
+            var items = document.getElementsByName("hobby"); 
+            for(var i = 0; i < items.length; i++)
+                if(items[i].checked) {
+                    item += items[i].value;
+                    item += " ";
+                }
+            if(registerForm.name1.value != "" && registerForm.pwd1.value != "" && registerForm.telFirst.value != "" && registerForm.tel.value != "" && registerForm.sex.value != "" && item != "") {      
+                document.getElementById("page1").style.display="none";
+                document.getElementById("page2").style.display="none";  
+                registerForm.innerHTML= "用户名"+registerForm.name1.value+"<br>手机号"+registerForm.telFirst.value+""+registerForm.tel.value+"<br>性别"+registerForm.sex.value+"<br>爱好"+item;               
+                return false;          
+            }
+            document.getElementById("loginTip1").style.display="inline";
+            document.getElementById("loginTip1").innerHTML="请详细填写资料";
+            return false;
+        }
+    </script>
+</body>
+</html>
