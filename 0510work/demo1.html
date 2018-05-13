@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login/Register</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: url(asset/bg1.png) no-repeat center bottom;
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .formbox {
+            width: 360px;
+            margin-top: 8%;
+            padding: 35px;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 1px 2px 15px rgba(0, 0, 0, .3);
+        }
+
+        .formbox h3 {
+            color: #00aaee;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .formbox h3 ul {
+            display: flex;
+            padding: 0;
+        }
+
+        .formbox h3 ul li {
+            list-style: none;
+            width: 50%;
+            cursor: pointer;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .formbox h3 ul li:nth-child(1) {
+            border-right: 1px solid #eee;
+        }
+
+        .formbox #page1 {
+            display: inline;
+        }
+
+        .formbox #page2 {
+            display: none;
+        }
+
+        .formbox .error {
+            height: 26px;
+            line-height: 26px;
+            color: #f13d3d;
+            text-align: center;
+            display: none;
+        }
+
+        .formbox form {
+            margin: 10px 25px;
+        }
+
+        .formbox form p {
+            margin: 15px 0;
+        }
+
+        .formbox form .inputbox,
+        .formbox form .username,
+        .formbox form .password {
+            width: 100%;
+            height: 45px;
+            margin-top: 20px;
+            border: 2px solid #ccc;
+        }
+
+        .formbox form .username,
+        .formbox form .password {
+            padding: 5px;
+        }
+
+        .formbox form .inputbox {
+            position: relative;
+        }
+
+        .formbox form select {
+            position: absolute;
+            width: 62px;
+            height: 40px;
+            border: 0;
+            outline: none;
+        }
+
+        .formbox form .phone {
+            padding: 6px 12px;
+            padding-left: 92px;
+            width: 235px;
+            height: 100%;
+            outline: none;
+            border: 0;
+        }
+
+        .formbox form .btn {
+            width: 100%;
+            margin-top: 15px;
+            height: 42px;
+            background: #00aaee;
+            color: #fff;
+            outline: none;
+            border: none;
+        }
+
+        .formbox form .btn:hover {
+            background: #03a1df;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="msg"></div>
+    <div class="formbox">
+        <h3>
+            <ul>
+                <li id="login">登录</li>
+                <li id="register">注册</li>
+            </ul>
+        </h3>
+        <form id="loginForm" method="POST">
+            <div id="page1">
+                <div id="loginTip" class="error"></div>
+                <input type="text" class="username" name="username" placeholder="输入姓名" />
+                <input type="password" class="password" name="pwd" placeholder="输入密码">
+                <input type="submit" value="登录" class="btn" />
+                </p>
+            </div>
+        </form>
+        <form id="registerForm" method="POST">
+            <div id="page2">
+                <div id="loginTip1" class="error"></div>
+                <input type="text" class="username" name="username" placeholder="输入姓名" />
+                <input type="password" class="password" name="pwd" placeholder="输入密码">
+                <div class="inputbox">
+                    <select name="telFirst">
+                        <option>+86</option>
+                        <option>+852</option>
+                        <option>+886</option>
+                        <option>+1</option>
+                    </select>
+                    <input type="text" class="phone" name="tel" placeholder="输入手机号">
+                </div>
+                <p>性别：
+                    <input type="radio" value="男" name="sex">男
+                    <input type="radio" value="女" name="sex">女</p>
+                <p>爱好：
+                    <input type="checkbox" name="hobby" value="跑步">跑步
+                    <input type="checkbox" name="hobby" value="看书">看书
+                    <input type="checkbox" name="hobby" value="摄影">摄影
+                    <input type="submit" value="注册" class="btn" />
+                </p>
+            </div>
+        </form>
+    </div>
+    <script src="asset/jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#login').click(function () {
+                $('#page1').css('display', 'inline');
+                $('#page2').css('display', 'none');
+            });
+            $('#register').click(function () {
+                $('#page1').css('display', 'none');
+                $('#page2').css('display', 'inline');
+            });
+            $('#loginForm').submit(function () {
+                if ($("#page1 input[name='username']").val() == '') {
+                    $('#loginTip').css('display', 'inline').html('请输入姓名');
+                    $("#page1 input[name='username']").focus();
+                    return false;
+                }
+                if ($("#page1 input[name='pwd']").val().length < 6) {
+                    $('#loginTip').css('display', 'inline').html('密码不能小于六位');
+                    $("#page1 input[name='pwd']").focus();
+                    return false;
+                }
+            });
+            $('#registerForm').submit(function () {
+                var item = '';
+                $("#page2 input:checkbox[name='hobby']:checked").each(function (i) {
+                    item += ($(this).val() + ' ');
+                });
+                if ($("#page2 input[name='username']").val() != '' && $("#page2 input[name='pwd']").val() != '' && $("#page2 select[name='telFirst']").val() != '' && $("#page2 input[name='tel']").val() != '' && $("#page2 input:radio[name='sex']:checked") != '' && item != '') {
+                    $("#page1").css('display', 'none');
+                    $("#page2").css('display', 'none');
+                    $('#registerForm').html('用户名' + $("#page2 input[name='username']").val() + '<br>手机号' + $("#page2 select[name='telFirst']").val() + ' ' + $("#page2 input[name='tel']").val() + '<br>性别' + $("#page2 input:radio[name='sex']:checked").val() + '<br>爱好' + item);
+                    return false;
+                }
+                $("#loginTip1").css('display', 'inline').html('请详细填写资料');
+                return false;
+            });
+            $("#page1 input[name='pwd']").blur(function () {
+                $.post('http://www.1ke.co/backend/teach/js/post.php',{
+                    username: $("#page1 input[name='username']").val(),
+                    pwd: $("#page1 input[name='pwd']").val()
+                },
+                function(data){
+                    $('#msg').css({ 'padding': '10px', 'color': '#fff', 'background': '#75c0dd' }).html(data);
+                })                  
+            })
+        })
+    </script>
+</body>
+
+</html>

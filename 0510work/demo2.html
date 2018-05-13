@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CarData</title>
+</head>
+
+<body>
+    <button>请求数据</button>
+    <div id="msg"></div>
+    <script src="asset/jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('button').click(function () {
+                $.get('http://www.1ke.co/backend/teach/js/json.php', function (data) {
+                    var txt = '审核信息：' + data.message + '<br>' + '车型：';
+                    for(var i= 0; i < data.cars.length; i++){
+                        txt += data.cars[i]+'&nbsp';
+                    }
+                    $('#msg').html(txt);
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>
