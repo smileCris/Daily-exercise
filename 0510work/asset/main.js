@@ -1,21 +1,25 @@
-$("#clear").click(function() {
-	localStorage.clear();
-	load();
-}) 
-
-$("#form").submit(function () {
-	var $title = $("#title");
-	if ($title.val() == "") {
-		alert("error");
-	} else {
-		var data = loadData();
-		var todo = { "title": $title.val(), "done": false };
-		data.push(todo);
-		saveData(data);
-		var $form = $("#form");
-		$form[0].reset();
+$(function () {
+	$("#clear").click(function () {
+		localStorage.clear();
 		load();
-	}
+	})
+})
+
+$(function () {
+	$("#form").submit(function () {
+		var $title = $("#title");
+		if ($title.val() == "") {
+			alert("error");
+		} else {
+			var data = loadData();
+			var todo = { "title": $title.val(), "done": false };
+			data.push(todo);
+			saveData(data);
+			var $form = $("#form");
+			$form[0].reset();
+			load();
+		}
+	})
 })
 
 function loadData() {
