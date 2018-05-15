@@ -45,7 +45,7 @@
             cxt.closePath();
             // 画表心
             cxt.beginPath();
-            cxt.arc(150, 150, 10, 0, 2 * Math.PI);
+            cxt.arc(150, 150, 4, 0, 2 * Math.PI);
             cxt.fillStyle = 'red';
             cxt.fill();
             cxt.closePath();
@@ -57,35 +57,30 @@
                 cxt.save();
                 cxt.translate(0, -130);
                 // 设置字体样式
-                cxt.font = '300 14px Helvetica';
+                cxt.font = '300 14px Arial';
                 // 设置字体填充颜色
                 cxt.fillStyle = '#cae3e7';
-                // 从坐标点(50,50)开始绘制文字
+                // 开始绘制文字
                 if (i == 1) {
                 cxt.rotate(-30 * i * Math.PI / 180);
                     cxt.fillText('05', -6, 4);
                 } else if (i == 0) {
-                    cxt.fillStyle = 'black';
+                    cxt.strokeStyle = 'rgba(255, 255, 255, 0)';
                 }
                 else {
                 cxt.rotate(-30 * i * Math.PI / 180);
                     cxt.fillText(i * 5, -6, 4);
                 }
-                cxt.stroke();
-                cxt.beginPath();
-                cxt.moveTo(0, -90);
-                cxt.lineTo(0, -80);
-                cxt.closePath();
                 cxt.restore();
-                cxt.translate(0, -105);
+                cxt.translate(-5, -105);
                 cxt.rotate(-30 * i * Math.PI / 180);
                 // 设置字体样式
-                cxt.font = '700 22px Helvetica';
+                cxt.font = '200 28px Helvetica';
                 // 设置字体填充颜色
                 cxt.fillStyle = '#fff';
-                // 从坐标点(50,50)开始绘制文字
+                // 开始绘制文字
                 if (i == 0) {
-                    cxt.fillText(12, -6, 4);
+                    cxt.strokeStyle = 'rgba(255, 255, 255, 0)';
                 }
                 else {
                     cxt.fillText(i, -6, 4);
@@ -142,7 +137,7 @@
             cxt.rotate(30 * h * Math.PI / 180);
             cxt.rotate(0.5 * m * Math.PI / 180);
             cxt.rotate((1 / 120) * m * Math.PI / 180);
-            cxt.lineWidth = "4";
+            cxt.lineWidth = "6";
             cxt.beginPath();
             cxt.moveTo(0, -55);
             cxt.lineTo(0, -3);
