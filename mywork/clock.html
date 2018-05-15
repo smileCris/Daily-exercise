@@ -38,8 +38,11 @@
             cxt.clearRect(0, 0, 300, 300);  // 在给定矩形内清空一个矩形
             // 画表盘
             cxt.beginPath();    // 开始一条路径
-            cxt.rect(0, 0, 300, 300);
-            cxt.fillStyle = 'black';
+            cxt.arc(150, 150, 150, 0, 2 * Math.PI);
+            var c = cxt.createRadialGradient(150, 150, 0, 150, 150, 120);
+            c.addColorStop(0, "#010101");
+            c.addColorStop(1, "#444849")
+            cxt.fillStyle = c;
             cxt.fill();
             cxt.stroke();
             cxt.closePath();
@@ -62,13 +65,13 @@
                 cxt.fillStyle = '#cae3e7';
                 // 开始绘制文字
                 if (i == 1) {
-                cxt.rotate(-30 * i * Math.PI / 180);
+                    cxt.rotate(-30 * i * Math.PI / 180);
                     cxt.fillText('05', -6, 4);
                 } else if (i == 0) {
                     cxt.strokeStyle = 'rgba(255, 255, 255, 0)';
                 }
                 else {
-                cxt.rotate(-30 * i * Math.PI / 180);
+                    cxt.rotate(-30 * i * Math.PI / 180);
                     cxt.fillText(i * 5, -6, 4);
                 }
                 cxt.restore();
@@ -145,7 +148,7 @@
             cxt.closePath();
             cxt.stroke();
             cxt.restore();
-            setTimeout(displayTime, 1000) /*每过一秒执行一次displayTime*/
+            setTimeout(displayTime, 1000); /*每过一秒执行一次displayTime*/
         }())
     </script>
 </body>
