@@ -41,14 +41,14 @@
             cxt.arc(150, 150, 150, 0, 2 * Math.PI);
             var c = cxt.createRadialGradient(150, 150, 0, 150, 150, 120);
             c.addColorStop(0, "#010101");
-            c.addColorStop(1, "#444849")
+            c.addColorStop(1, "#fff")
             cxt.fillStyle = c;
             cxt.fill();
             cxt.stroke();
             cxt.closePath();
             // 画表心
             cxt.beginPath();
-            cxt.arc(150, 150, 4, 0, 2 * Math.PI);
+            cxt.arc(150, 150, 3, 0, 2 * Math.PI);
             cxt.fillStyle = 'red';
             cxt.fill();
             cxt.closePath();
@@ -60,9 +60,9 @@
                 cxt.save();
                 cxt.translate(0, -130);
                 // 设置字体样式
-                cxt.font = '300 14px Arial';
+                cxt.font = '600 14px Arial';
                 // 设置字体填充颜色
-                cxt.fillStyle = '#cae3e7';
+                cxt.fillStyle = '#555';
                 // 开始绘制文字
                 if (i == 1) {
                     cxt.rotate(-30 * i * Math.PI / 180);
@@ -78,9 +78,9 @@
                 cxt.translate(-5, -105);
                 cxt.rotate(-30 * i * Math.PI / 180);
                 // 设置字体样式
-                cxt.font = '200 28px Helvetica';
+                cxt.font = '300 28px Helvetica';
                 // 设置字体填充颜色
-                cxt.fillStyle = '#fff';
+                cxt.fillStyle = '#000';
                 // 开始绘制文字
                 if (i == 0) {
                     cxt.strokeStyle = 'rgba(255, 255, 255, 0)';
