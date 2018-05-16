@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* base-page css */
+a {
+    text-decoration: none;
+    color: #222;
+}
+.base-main {
+    display: flex;
+}
+.page-left {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    min-width: 150px;
+    padding: 100px 10px;
+    height: 100%;
+}
+.page-left > * {
+    padding: 15px 25px;
+}
+.header .logo {
+    border: 5px solid #222;
+    padding: 10px 20px;
+    font-size: 30px;
+    display: inline-block;
+}
+.nav, .list {
+    display: flex;
+    flex-direction: column;
+    min-height: 110px;
+}
+.nav a, .list a {
+    margin-top: 10px;
+} 
+.nav a {
+    color: #333;
+}
+.nav a:hover {
+    color: crimson;
+}
+.list a {
+    color: #999;
+}
+.nav .item {
+    text-transform: uppercase;
+}
+.page-main {
+    width: 80%;
+    margin-left: 20%;
+}
+.page-1-main {
+    padding: 50px;
+}
+.top {
+    width: 100%;
+    height: 560px;
+}
+.top .img {
+    width: 100%;
+    height: 560px;
+    background: url(../image/pic-1.jpg);
+    background-size: cover;
+}
+
+/* page1 css */
+.page-1-main .list {
+    display: flex;
+    margin-top: 20px;
+    flex-direction: row;
+}
+.list a {
+    margin-right: 5%;
+    width: 30%;
+}
+.page-1-main .list a img {
+    width: 100%;
+}
+.page-1-main .list a:nth-child(3) {
+    margin-right: 0;
+}
+
+/* page2 css */
+.page-2-main {
+    padding: 20px 50px;
+    display: flex;
+}
+.page-2-main .left, .page-2-main .right {
+    width: 50%;
+}
+.page-2-main .left img {
+    width: 100%;
+}
+.page-2-main .right {
+    padding: 100px 5%;
+}
+.page-2-main .right > * {
+    margin-top: 30px;
+}
+.right .mens, .right .share {
+    color: #777;
+    font-size: 16px;
+    cursor: pointer;
+}
+.right p {
+    color: #777;
+    font-size: 14px;
+}
+.right .title {
+    margin-top: 80px;
+    font-size: 20px;
+    font-weight: 700;
+}
+.right #num {
+    height: 30px;
+}
+.right .button {
+    background: #000;
+    color: #fff;
+    font-size: 15px;
+    padding: 10px;
+    width: 100px;
+    cursor: pointer;
+}
+.span {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 40px;
+    background: #000;
+    display: none;
+    padding: 10px 20px;
+    color: #fff;
+}
