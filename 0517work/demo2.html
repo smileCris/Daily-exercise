@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>html元素转canvas并一键生成png图片(支持img图片元素)</title>
+	<!-- html2canvas将Dom节点在Canvas里边画出来 -->
+	<script src="assets/js/html2canvas.min.js"></script>
+
+	<!-- 将canvas图片保存成图片 -->
+	<script src="assets/js/canvas2image.js"></script>
+	<script src="assets/js/base64.js"></script>
+	<script src="assets/js/jquery.js"></script>
+	<style>
+		p {
+			font-size: 15px;
+			font-family: 'Microsoft YaHei', 'Lantinghei SC', 'Open Sans', Arial, 'Hiragino Sans GB', 'STHeiti', 'WenQuanYi Micro Hei', 'SimSun', sans-serif;
+		}
+	</style>
+</head>
+
+<body>
+	<section class="share_popup" id="html2canvas">
+		<p>
+			<img src="assets/main.jpg" width="100%">
+		</p>
+	</section>
+	<script>
+		$(function () {
+			html2canvas(html2canvas, {
+				onrendered: function (canvas) {
+					//添加属性  
+					canvas.setAttribute('id', 'html2canvas');
+					//读取属性值  
+					// var value= canvas.getAttribute('id');  
+					$(body).appendChild(canvas);
+				}
+			});
+		})
+/*生成canvas图形*/  
+	</script>
+</body>
+
+</html>

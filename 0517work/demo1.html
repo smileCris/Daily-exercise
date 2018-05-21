@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/demo1.css">
+    <title>login</title>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="nav">
+            <a href="https://themes.getbootstrap.com" class="navbar-band">Bootstrap Themes</a>
+            <div id="right">login</div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="container">
+            <div class="form">
+                <img src="assets/bootstrap-logo.svg" class="logo">
+                <form id="userForm" action="#">
+                    <div class="form-group">
+                        <label for="user_email">Email</label>
+                        <input type="text" name="user_email" id="user_email" class="form-control" value="" size="20">
+                        <span class="myerror"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="user_pwd">Password</label>
+                        <a class="form-sublink">Forgot password?</a>
+                        <input type="password" name="user_pwd" id="user_pwd" class="form-control" value="" size="20">
+                        <span class="myerror"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="btn" id="btn" class="btn" value="Sign In">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/jquery.validate.min.js"></script>
+    <script src="assets/js/wanning.js"></script>
+    <script src="assets/js/jquery.simplemodal-1.4.4.js"></script>
+    <script>
+        $(function () {
+            var $userForm = $("#userForm");
+            $userForm.validate({
+                debug: true,
+                errorClass: 'myerror',
+                errorLableContainer: $('.error'),
+                rules: {
+                    user_email: {
+                        checkMe1: true,
+                        required: true
+                    },
+                    user_pwd: {
+                        checkMe2: true,
+                        required: true
+                    }
+                }
+            });
+            jQuery.validator.addMethod("checkMe1", function (value, element) {
+                var reg = /^123@123$/;
+                return this.optional(element) || (reg.test(value));
+            }, "必须填123@123");
+            jQuery.validator.addMethod("checkMe2", function (value, element) {
+                var reg = /^123123$/;
+                return this.optional(element) || (reg.test(value));
+            }, "必须填123123");
+        })
+
+        $('#btn').click(function () {
+            if (!$("#userForm").valid()) {
+                return;
+            }
+            $.ajax({
+                url: 'https://easy-mock.com/mock/5b01b4a0fbc2f441d2e4dc4d/NT0512/false.json',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    if ((data.user_email || data.user_pwd) == null) {
+                        alert('error：内容为空！');
+                    }
+                    else {
+                        var str = '邮箱:' + data.user_email + '密码：' + data.user_pwd;
+                        alert(str);
+                    }
+                },
+                error: function (data) {
+                    alert('error');
+                }
+            });
+            $.ajax({
+                url: 'https://easy-mock.com/mock/5b01b4a0fbc2f441d2e4dc4d/NT0512/true.json',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var str = '邮箱:' + data.user_email + '密码：' + data.user_pwd;
+                    $.modal('<div id="msg">' + str + '</div>');
+                    setTimeout(() => {
+                        $.modal.close();
+                    }, 3000);
+                    $('#right').html(data.user_email + '欢迎你！');
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>
