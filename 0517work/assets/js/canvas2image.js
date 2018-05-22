@@ -1,20 +1,16 @@
 /*
  * Canvas2Image v0.1
- * Copyright (c) 2008 Jacob Seidelin, jseidelin@nihilogic.dk
+ * Download by http://www.bvbsoft.com 
+ * Copyright (c) 2008 Jacob Seidelin, cupboy@gmail.com
  * MIT License [http://www.opensource.org/licenses/mit-license.php]
  */
 
 var Canvas2Image = (function() {
-
 	// check if we have canvas support
-	var bHasCanvas = false;
 	var oCanvas = document.createElement("canvas");
-	if (oCanvas.getContext("2d")) {
-		bHasCanvas = true;
-	}
-
+  
 	// no canvas, bail out.
-	if (!bHasCanvas) {
+	if (!oCanvas.getContext) {
 		return {
 			saveAsBMP : function(){},
 			saveAsPNG : function(){},
@@ -42,7 +38,7 @@ var Canvas2Image = (function() {
 			strData = data;
 		} else {
 			var aData = data;
-			for (var i=0;i<aData.length;i++) {
+			for (var i = 0; i < aData.length; i++) {
 				strData += String.fromCharCode(aData[i]);
 			}
 		}
@@ -71,7 +67,7 @@ var Canvas2Image = (function() {
 		aHeader.push(0); // reserved
 		aHeader.push(0);
 
-		aHeader.push(54); // dataoffset
+		aHeader.push(54); // data offset
 		aHeader.push(0);
 		aHeader.push(0);
 		aHeader.push(0);
@@ -111,7 +107,7 @@ var Canvas2Image = (function() {
 		aInfoHeader.push(iDataSize % 256); iDataSize = Math.floor(iDataSize / 256);
 		aInfoHeader.push(iDataSize % 256); 
 	
-		for (var i=0;i<16;i++) {
+		for (var i = 0; i < 16; i++) {
 			aInfoHeader.push(0);	// these bytes not used
 		}
 	
@@ -137,15 +133,14 @@ var Canvas2Image = (function() {
 			strPixelData += strPixelRow;
 		} while (--y);
 
-		var strEncoded = encodeData(aHeader.concat(aInfoHeader)) + encodeData(strPixelData);
-
-		return strEncoded;
+		return encodeData(aHeader.concat(aInfoHeader)) + encodeData(strPixelData);
 	}
-
 
 	// sends the generated file to the client
 	var saveFile = function(strData) {
-		document.location.href = strData;
+    if (!window.open(strData)) {
+      document.location.href = strData;
+    }
 	}
 
 	var makeDataURI = function(strData, strMime) {
@@ -162,6 +157,7 @@ var Canvas2Image = (function() {
 	var scaleCanvas = function(oCanvas, iWidth, iHeight) {
 		if (iWidth && iHeight) {
 			var oSaveCanvas = document.createElement("canvas");
+			
 			oSaveCanvas.width = iWidth;
 			oSaveCanvas.height = iHeight;
 			oSaveCanvas.style.width = iWidth+"px";
@@ -169,14 +165,14 @@ var Canvas2Image = (function() {
 
 			var oSaveCtx = oSaveCanvas.getContext("2d");
 
-			oSaveCtx.drawImage(oCanvas, 0, 0, oCanvas.width, oCanvas.height, 0, 0, iWidth, iHeight);
+			oSaveCtx.drawImage(oCanvas, 0, 0, oCanvas.width, oCanvas.height, 0, 0, iWidth, iWidth);
+			
 			return oSaveCanvas;
 		}
 		return oCanvas;
 	}
 
 	return {
-
 		saveAsPNG : function(oCanvas, bReturnImg, iWidth, iHeight) {
 			if (!bHasDataURL) {
 				return false;
@@ -201,6 +197,29 @@ var Canvas2Image = (function() {
 			var strData = oScaledCanvas.toDataURL(strMime);
 	
 			// check if browser actually supports jpeg by looking for the mime type in the data uri.
+			// if not, return false
+			if (strData.indexOf(strMime) != 5) {
+				return false;
+			}
+
+			if (bReturnImg) {
+				return makeImageObject(strData);
+			} else {
+				saveFile(strData.replace(strMime, strDownloadMime));
+			}
+			return true;
+		},
+
+		saveAsJPG : function(oCanvas, bReturnImg, iWidth, iHeight) {
+			if (!bHasDataURL) {
+				return false;
+			}
+
+			var oScaledCanvas = scaleCanvas(oCanvas, iWidth, iHeight);
+			var strMime = "image/jpg";
+			var strData = oScaledCanvas.toDataURL(strMime);
+	
+			// check if browser actually supports jpg by looking for the mime type in the data uri.
 			// if not, return false
 			if (strData.indexOf(strMime) != 5) {
 				return false;

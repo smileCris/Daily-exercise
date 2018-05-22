@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>html2Canvas</title>
+    <style>
+        .contain {
+            width: 20%;
+            padding-bottom: 30x;
+            border: 1px solid #eee;
+            text-align: center;
+        }
+        .info, #h5canvas, #h5img {
+            display: none;
+        }
+		@media (max-width: 576px) {
+			.contain {width: 100%;}
+		}
+    </style>
+</head>
+<body>
+    <div class="contain">
+        <div id="main">
+            <p><img src="assets/img/content.jpg" width="100%"></p>
+            <p>不求人好感，不予人难堪</p>
+        </div>
+        <div class="info">长按保存 分享朋友圈</div>
+        <div id="h5canvas"></div>
+        <div id="h5img"></div>
+    </div>
+    <script src="assets/js/jquery.js"></script>
+	<script src="assets/js/canvas2image.js"></script>
+	<script src="assets/js/html2canvas.js"></script>
+    <script>
+        html2canvas(document.querySelector('#main')).then(function (canvas) {
+            document.querySelector('#h5canvas').appendChild(canvas);
+            var oCanvas = document.getElementsByTagName('canvas')[0];
+            var oImg = Canvas2Image.saveAsJPG(oCanvas, true);
+            document.getElementById('h5img').appendChild(oImg);
+            $('.info').show();
+            if($('.info').is(':visible')){
+                $('.main').hide();
+                $('#h5canvas').hide();
+            }
+        });
+    </script>
+</body>
+</html>
