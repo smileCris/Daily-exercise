@@ -2,46 +2,64 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<title>html2canvas</title>
-	<!-- html2canvas将Dom节点在Canvas里边画出来 -->
-	<script src="assets/js/html2canvas.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>html2Canvas</title>
+    <style>
+        .contain {
+            width: 20%;
+            padding-bottom: 30x;
+            border: 1px solid #eee;
+            text-align: center;
+        }
 
-	<!-- 将canvas图片保存成图片 -->
-	<script src="assets/js/canvas2image.js"></script>
-	<script src="assets/js/base64.js"></script>
-	<script src="assets/js/jquery.js"></script>
-	<style>
-		p {
-			font-size: 15px;
-			font-family: 'Microsoft YaHei', 'Lantinghei SC', 'Open Sans', Arial;
-		}
-		@media (min-width: 576px) {
-			img {width: 100%;}
-		}
-	</style>
+        .info,
+        #h5canvas {
+            display: none;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        @media (max-width: 576px) {
+            .contain {
+                width: 100%;
+                padding-bottom: 30x;
+            }
+        }
+    </style>
 </head>
 
 <body>
-	<section class="share_popup" id="html2canvas">
-		<p>
-			<img src="assets/img/main.jpg" width="100%">
-		</p>
-	</section>
-	<script>
-		$(function () {
-			html2canvas(html2canvas, {
-				onrendered: function (canvas) {
-					//添加属性  
-					canvas.setAttribute('id', 'html2canvas');
-					//读取属性值  
-					// var value= canvas.getAttribute('id');  
-					$(body).appendChild(canvas);
-				}
-			});
-		})
-/*生成canvas图形*/  
-	</script>
+    <div class="contain">
+        <div id="main">
+            <p>
+                <img src="assets/img/content.jpg">
+            </p>
+            <p>不求人好感，不予人难堪</p>
+        </div>
+        <div class="info">长按保存 分享朋友圈</div>
+        <div id="h5canvas"></div>
+        <div id="h5img"></div>
+    </div>
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/canvas2image.js"></script>
+    <script src="assets/js/html2canvas.js"></script>
+    <script>
+        html2canvas(document.querySelector('#main')).then(function (canvas) {
+            document.querySelector('#h5canvas').appendChild(canvas);
+            var oCanvas = document.getElementsByTagName('canvas')[0];
+            var oImg = Canvas2Image.saveAsJPEG(oCanvas, true);
+            document.getElementById('h5img').appendChild(oImg);
+            $('.info').show();
+            if ($('.info').is(':visible')) {
+                $('#main').hide();
+                $('#h5canvas').hide();
+            }
+        });
+    </script>
 </body>
 
 </html>
