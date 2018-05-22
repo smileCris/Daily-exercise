@@ -37,11 +37,11 @@
         html2canvas(document.querySelector('#main')).then(function (canvas) {
             document.querySelector('#h5canvas').appendChild(canvas);
             var oCanvas = document.getElementsByTagName('canvas')[0];
-            var oImg = Canvas2Image.saveAsJPG(oCanvas, true);
+            var oImg = Canvas2Image.saveAsJPEG(oCanvas, true);
             document.getElementById('h5img').appendChild(oImg);
             $('.info').show();
             if($('.info').is(':visible')){
-                $('.main').hide();
+                $('#main').hide();
                 $('#h5canvas').hide();
             }
         });
