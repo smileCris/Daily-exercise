@@ -38,17 +38,14 @@
             cxt.clearRect(0, 0, 300, 300);  // 在给定矩形内清空一个矩形
             // 画表盘
             cxt.beginPath();    // 开始一条路径
-            cxt.arc(150, 150, 150, 0, 2 * Math.PI);
-            var c = cxt.createRadialGradient(150, 150, 0, 150, 150, 120);
-            c.addColorStop(0, "#010101");
-            c.addColorStop(1, "#eee")
-            cxt.fillStyle = c;
+            cxt.rect(0, 0, 300, 300);
+            cxt.fillStyle = 'black';
             cxt.fill();
             cxt.stroke();
             cxt.closePath();
             // 画表心
             cxt.beginPath();
-            cxt.arc(150, 150, 3, 0, 2 * Math.PI);
+            cxt.arc(150, 150, 4, 0, 2 * Math.PI);
             cxt.fillStyle = 'red';
             cxt.fill();
             cxt.closePath();
@@ -60,27 +57,27 @@
                 cxt.save();
                 cxt.translate(0, -130);
                 // 设置字体样式
-                cxt.font = '600 14px Arial';
+                cxt.font = '300 14px Arial';
                 // 设置字体填充颜色
-                cxt.fillStyle = '#555';
+                cxt.fillStyle = '#cae3e7';
                 // 开始绘制文字
                 if (i == 1) {
-                    cxt.rotate(-30 * i * Math.PI / 180);
+                cxt.rotate(-30 * i * Math.PI / 180);
                     cxt.fillText('05', -6, 4);
                 } else if (i == 0) {
                     cxt.strokeStyle = 'rgba(255, 255, 255, 0)';
                 }
                 else {
-                    cxt.rotate(-30 * i * Math.PI / 180);
+                cxt.rotate(-30 * i * Math.PI / 180);
                     cxt.fillText(i * 5, -6, 4);
                 }
                 cxt.restore();
                 cxt.translate(-5, -105);
                 cxt.rotate(-30 * i * Math.PI / 180);
                 // 设置字体样式
-                cxt.font = '300 28px Helvetica';
+                cxt.font = '200 28px Helvetica';
                 // 设置字体填充颜色
-                cxt.fillStyle = '#000';
+                cxt.fillStyle = '#fff';
                 // 开始绘制文字
                 if (i == 0) {
                     cxt.strokeStyle = 'rgba(255, 255, 255, 0)';
@@ -148,7 +145,7 @@
             cxt.closePath();
             cxt.stroke();
             cxt.restore();
-            setTimeout(displayTime, 1000); /*每过一秒执行一次displayTime*/
+            setTimeout(displayTime, 1000) /*每过一秒执行一次displayTime*/
         }())
     </script>
 </body>
